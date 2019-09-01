@@ -30,9 +30,17 @@ var config = {
   module: {
           loaders:[
                { test:/\.css$/, loader:ExtractTextPlugin.extract('style-loader', 'css-loader') }, //css 单独打包
-               { test: /\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/, loader: 'file-loader?name=resource/[name].[ext]'},
-                            
+               { test: /\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/, loader: 'file-loader?name=resource/[name].[ext]'}
           ]
+    },
+    resolve : {
+        alias : {
+            node_modules    : __dirname + '/node_modules',
+            util            : __dirname + '/src/util',
+            page            : __dirname + '/src/page',
+            service         : __dirname + '/src/service',
+            image           : __dirname + '/src/image'
+        }
     },
   externals : {//引入外部的变量
   	'jquery' : 'window.jQuery'
@@ -54,8 +62,7 @@ var config = {
 //	chunks   :['common','index'],
 //})
       new HtmlWebpackPlugin(getHtmlConfig('index')),//用方法来传参数，减少代码
-      new HtmlWebpackPlugin(getHtmlConfig('login')),
-
+      new HtmlWebpackPlugin(getHtmlConfig('login'))
   ]
 };
 
